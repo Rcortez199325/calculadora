@@ -2,3 +2,49 @@
     margin: 0;
     padding: 0;
 }
+.container{
+    width: 250px;
+    height: 300px;
+    background-color: beige;
+    display: block;
+    border: 5px black solid;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin: 20px auto;
+}
+.containerDisplay{
+    background-color: red;
+    width: 90%;
+    height:auto;
+    margin: 5%;
+    box-sizing: border-box;
+    display: block;
+    float: left;
+    clear:none;
+    margin-bottom: 10px;
+}
+.display{
+    text-align: right;
+    height:30px;
+    width:100%;
+    box-sizing: border-box;
+    font-size: 14pt;
+    font-family: monospace;
+}
+.containerDigits{
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    display: block;
+    float:left;
+    clear:none;
+}
+.digit{
+    display:block;
+    clear:none;
+    float:left;
+    width: 40px;
+    height: 40px;
+    box-sizing: border-box;
+    margin: 10px;
+}
