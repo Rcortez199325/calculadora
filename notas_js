@@ -1,0 +1,57 @@
+//Extraer todo via Query Selector
+const _divTexto = document.querySelector("#divTexto");
+const _divTextoB = document.querySelector("#divTextoB");
+const _inputText = document.querySelector("#inputText");
+const _inputButton = document.querySelector("#inputButton");
+const _boton = document.querySelector("#boton");
+
+const __divtexto = document.getElementById("divTexto");
+const __divtextoB = document.getElementById("divTextoB");
+const __inputText = document.getElementById("inputText");
+const __inputButton = document.getElementById("inputButton");
+const __boton = document.getElementById("boton");
+
+/*
+var parrafo = document.createElement("div");
+parrafo.className= "controles";
+var contenido = document.createTextNode("Creado desde DOM");
+parrafo.appendChild(contenido);
+document.body.appendChild(parrafo);
+*/
+
+//Funcion Externa
+const nombreA = "Ramon";
+const nombreB = "Adrian";
+
+function saludarA(e) {
+    this.e = e;
+    alert(`Hola mi nombre es ${e}`);
+}
+
+function saludarB() {
+    alert(`Hola mi nombre es ${nombreB}`);
+}
+//Asignacion de Funcion al elemento HTML
+
+////usar este metodo sí SI es necesario meter parametros
+//document.getElementById("boton").onclick = ()=>saludarA(nombreA);
+//
+////usar este metodo sí NO es necesario meter parametros
+//document.getElementById("inputButton").onclick = saludarB;
+
+
+////Con querySelector solo funciona la tecnica del callback
+//_inputButton.onclick = ()=>saludarA(nombreA);
+//
+//_boton.onclick = ()=> saludarB();
+
+//Desde una constante obtenida del Id
+__inputButton.onclick = ()=> saludarA(nombreA);
+__inputButton.onmouseover =()=> __inputButton.style.backgroundColor= "#eebbcc";
+__inputButton.onmouseout =()=> __inputButton.style.backgroundColor= "#cc88dd";
+
+__boton.onclick = ()=> saludarB();
+
+__boton.onmouseover =()=> __boton.style.backgroundColor= "#eebbcc";
+__boton.onmouseout =()=> __boton.style.backgroundColor= "#cc88dd";
+
