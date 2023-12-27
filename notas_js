@@ -55,3 +55,11 @@ __boton.onclick = ()=> saludarB();
 __boton.onmouseover =()=> __boton.style.backgroundColor= "#eebbcc";
 __boton.onmouseout =()=> __boton.style.backgroundColor= "#cc88dd";
 
+//
+12-27-2023
+se agregaron varias funcionalidades de botones.
+
+TEST- boton de resultado ( = ).
+FIX: el boton para meter numeros negativos funciona en el valorA pero no en el valorB (al parecer tiene que ver con el hecho de que en modo "operador" 
+si presionamos los 4 operadores basicos, estos se van cambiando uno por otro, en vez de que se quede ese operador fijo, cerremos proceso de operador y 
+nuevamente estamos en modo "escritura" y en este modo si que podremos entrar al negativo.
