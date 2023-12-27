@@ -7,9 +7,10 @@
 window.onload = ()=>{
   var estado = "listo";
   var punto = true; //se puede insertar un punto a la cantidad
-  var negativo = true; //se puede hacer este numero en negativo;
-  var ValorA = 0;//valores que se usaran para las operaciones
-  var ValorB = 0;
+  var negativo = true; //se puede hacer este numero en negativo;---sale sobrando
+  var valorA = "";//valores que se usaran para las operaciones
+  var valorB = "";
+  var valorOperador = "";
   //variable general de estado donde:
   //
   // 1.-listo - recien limpiado todo y listo para recibir:
@@ -20,12 +21,12 @@ window.onload = ()=>{
   // 2.- escribiendo
   // al pasar de listo a escribiendo lo que hace es borrar el (0) inicial
   // y empezar a escribir los digitos correspondientes (aqui tambien se incluye el punto, pero solamente una vez);
-  //
+  // 3.- operador
   // Cuando esta en escribiendo y se da click en algun operador... 
   // este se pone en modo operador en esta seccion el usuario elige que operacion se va a realizar 
   // (suma, resta, multiplicacion, division, porcentaje, raiz o potencia)
   
-  const objDisplay = document.querySelector(".display");
+  var objDisplay = document.querySelector(".display");
   objDisplay.value = "0";
   objDisplay.textContent = "0";
   //Boton Reset
@@ -42,14 +43,70 @@ window.onload = ()=>{
   const objDigito_9 = document.querySelector(".digit-9");
   const objDigito_0 = document.querySelector(".digit-0");
   const objDigito_resta = document.querySelector(".digit-sub");
+  const objDigito_punto = document.querySelector(".digit-point");
+  const objDigito_suma = document.querySelector(".digit-add");
+  const objDigito_multiplicacion = document.querySelector(".digit-mult");
+  const objDigito_division = document.querySelector(".digit-div");
+  
+  const objDigito_resultado = document.querySelector(".digit-res");
 //-------------------Funciones--------------------------//
 //Limpiar
   function fncLimpiar() {
     estado = "listo";
     objDisplay.textContent = "0";
     objDisplay.value = "0";
+    punto = true;
+    valorOperador = "";
+    valorA = "";
+    valorB = "";
   }
-  
+  //---------------------------Funcion de resultado  ( = )-----------------------------//
+  /////////////////////////////////////////TODO: testeando la funcion
+  function fncResultado(objeto) {
+    //tiene que tener un valor A y otro valor B a huevo si no, manda error.
+    if (estado == "escribiendo") {
+      console.log("El valor A es:  " + valorA);
+      if (valorA != "") {//si tiene algun valor que no sea una cadena vacia;
+        valorB = objDisplay.textContent;
+        console.log("el valorB es: " + valorB);
+        //transformar ambas variables texto a numericas para la operacion;/
+        let _valorA = parseFloat(valorA);
+        let _valorB = parseFloat(valorB);
+        console.log("los valores a utilizar, son:  " + _valorA + "||" + _valorB);
+        console.log(_valorA + valorOperador + _valorB);//Podemos realizar una funcion que ya haga todo automata con los 3 argumentos
+        
+      } else if (valorA == "" || valorA == undefined){//si el valor es totalmente vacio
+        return false;
+      }
+    }
+  }
+  //------------------Funciones de operadores (+-*/% root power)
+  function fncOperador(objeto) {
+    this.objeto = objeto;
+    punto = true;//activar punto en modo operador
+    if (estado == "escribiendo") {
+      if (valorA == ""){
+        valorA = objDisplay.textContent;
+        console.log("el primer valor a restar es:  " + valorA);
+        objDisplay.textContent = "";
+        objDisplay.value = "";
+        estado = "operador";
+        console.log(objDisplay.textContent);
+        console.log("el estado es " + estado);
+        if (estado == "operador") {
+          objDisplay.textContent = objeto;
+          objDisplay.value = objDisplay.textContent;
+        }
+      } else{
+        //aqui deducimos que el valor A ya tiene algun valor, por lo que seria correcto deshabilitar por el momento.
+        return false;
+      }
+    } else if( estado == "operador"){
+      objDisplay.textContent = objeto;
+      objDisplay.value = objDisplay.textContent;
+    }
+  }
+  //--------------------Funcion manejo de Digitos 0-9 negativo y punto
   function fncDigitos1_9(objeto){
     this.objeto = objeto;
     //console.log(objeto);
@@ -59,13 +116,13 @@ window.onload = ()=>{
       if (estado == "listo") {
         //console.log("La cantidad es:" + objDisplay.textContent);
         return false; //si el primer digito que quieres ingresar es el 0 no haga nada;
-        
-        /////TODO:
-        //cuando se presiona el negativo se pueden presionar numeros (0) lo cual no es correcto
-        //agregar una condicional para solucionar que no se agreguen 0 a no ser que haya un digito detras de el y no el negativo
       } else if (estado =="escribiendo") {
-        objDisplay.textContent += objeto;//como ya hay un numero mayor a cero, ya puede escribir los que necesite.
-        objDisplay.value = objDisplay.textContent;
+        if (objDisplay.textContent == "-") {
+          return false;
+        }else {
+          objDisplay.textContent += objeto;//como ya hay un numero mayor a cero, ya puede escribir los que necesite.
+          objDisplay.value = objDisplay.textContent;
+        }
       }
     }else if (
       objeto == "1" || 
@@ -85,20 +142,53 @@ window.onload = ()=>{
           objDisplay.textContent += objeto;
           objDisplay.value = objDisplay.textContent;
         }
+        if (estado == "operador"){ //aqui ya se metio el primer valor, pero regresara la funcion en nombre de fichas.jpg
+          valorOperador = objDisplay.textContent;
+          console.log("el valor operador guardado es: " + valorOperador);
+          objDisplay.textContent = objeto;
+          objDisplay.value = objDisplay.textContent;
+          console.log(objDisplay.textContent);
+          console.log(objDisplay.value);
+          estado = "escribiendo";
+          console.log("el estado es: " + estado);
+        }
       }
-    if (objeto == "-"){//Negativo de un numero
+    if (objeto == "-"){//Negativo de un numero 
+      ///////////////////////TODO: no funciona el negativo para el valorB (hay que echarle coco papah)//////////////
         if (estado == "listo") {
           objDisplay.textContent = "-";
           objDisplay.value = objDisplay.textContent;
           estado = "escribiendo";
         } else if (estado =="escribiendo") {
-          //Ponerlo en la seccion de operador
+          fncOperador(objDigito_resta.textContent);//Modo operador del negativo first click
+          punto = true;//activar punto en modo operador
+        }
+        if (estado == "operador"){
+          fncOperador(objDigito_resta.textContent);//tecnicamente es para cambiar el signo a negativo en modo operador.
+          punto = true;//activar punto en modo operador - testing
         }
       }
+    if (objeto == ".") {
+      if (estado == "listo" ){
+        objDisplay.textContent = "0.";
+        objDisplay.value = objDisplay.textContent;
+        estado = "escribiendo";
+      } else if (estado == "escribiendo") {
+        if (punto == true) {//verifica que solo exita 1 punto en la calculadora
+          if (objDisplay.textContent == "-") {
+            objDisplay.textContent += "0.";
+            objDisplay.value = objDisplay.textContent;
+          } else {
+            objDisplay.textContent += objeto;
+            objDisplay.value = objDisplay.textContent;
+          }
+          punto = false;
+        } else{return false;}//aqui que no realice nada, porque ya se co
+      }
+    }
   }
   //Asignacion de botones
   objClear.onclick = fncLimpiar;
-  
   objDigito_1.onclick = ()=>fncDigitos1_9(objDigito_1.textContent);
   objDigito_2.onclick = ()=>fncDigitos1_9(objDigito_2.textContent);
   objDigito_3.onclick = ()=>fncDigitos1_9(objDigito_3.textContent);
@@ -110,4 +200,9 @@ window.onload = ()=>{
   objDigito_9.onclick = ()=>fncDigitos1_9(objDigito_9.textContent);
   objDigito_0.onclick = ()=>fncDigitos1_9(objDigito_0.textContent);
   objDigito_resta.onclick = ()=>fncDigitos1_9(objDigito_resta.textContent);
+  objDigito_punto.onclick = ()=>fncDigitos1_9(objDigito_punto.textContent);
+  objDigito_suma.onclick = ()=>fncOperador(objDigito_suma.textContent);
+  objDigito_multiplicacion.onclick = ()=>fncOperador(objDigito_multiplicacion.textContent);
+  objDigito_division.onclick = ()=>fncOperador(objDigito_division.textContent);
+  objDigito_resultado.onclick = ()=>fncResultado(objDigito_resultado.textContent);
 };
