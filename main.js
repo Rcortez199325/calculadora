@@ -62,19 +62,32 @@ window.onload = ()=>{
   }
   //---------------------------Funcion de resultado  ( = )-----------------------------//
   /////////////////////////////////////////TODO: testeando la funcion
+  function fncOperar(_valorA, _valorB,_signo){
+    this._valorA = _valorA;
+    this._valorB = _valorB;
+    this._signo = _signo;
+      switch (_signo) {
+        case '+':
+          return _valorA + _valorB;
+        case '-':
+          return _valorA - _valorB;
+        case '*':
+          return _valorA * _valorB;
+        case '/':
+          return _valorA / _valorB;
+      }
+    }
   function fncResultado(objeto) {
     //tiene que tener un valor A y otro valor B a huevo si no, manda error.
     if (estado == "escribiendo") {
-      console.log("El valor A es:  " + valorA);
       if (valorA != "") {//si tiene algun valor que no sea una cadena vacia;
         valorB = objDisplay.textContent;
-        console.log("el valorB es: " + valorB);
         //transformar ambas variables texto a numericas para la operacion;/
         let _valorA = parseFloat(valorA);
         let _valorB = parseFloat(valorB);
-        console.log("los valores a utilizar, son:  " + _valorA + "||" + _valorB);
-        console.log(_valorA + valorOperador + _valorB);//Podemos realizar una funcion que ya haga todo automata con los 3 argumentos
-        
+        objDisplay.textContent = fncOperar(_valorA,_valorB,valorOperador);
+        objDisplay.value = objDisplay.textContent;
+        let resultadoFinal = objDisplay.textContent;
       } else if (valorA == "" || valorA == undefined){//si el valor es totalmente vacio
         return false;
       }
@@ -87,16 +100,14 @@ window.onload = ()=>{
     if (estado == "escribiendo") {
       if (valorA == ""){
         valorA = objDisplay.textContent;
-        console.log("el primer valor a restar es:  " + valorA);
-        objDisplay.textContent = "";
-        objDisplay.value = "";
+        objDisplay.textContent = objeto;
+        objDisplay.value = objDisplay.textContent;
         estado = "operador";
-        console.log(objDisplay.textContent);
-        console.log("el estado es " + estado);
-        if (estado == "operador") {
-          objDisplay.textContent = objeto;
-          objDisplay.value = objDisplay.textContent;
-        }
+        valorOperador = objDisplay.textContent;
+        objDisplay.textContent = "0";
+        objDisplay.value = objDisplay.textContent;
+        estado = "listo";
+        //}
       } else{
         //aqui deducimos que el valor A ya tiene algun valor, por lo que seria correcto deshabilitar por el momento.
         return false;
@@ -109,12 +120,8 @@ window.onload = ()=>{
   //--------------------Funcion manejo de Digitos 0-9 negativo y punto
   function fncDigitos1_9(objeto){
     this.objeto = objeto;
-    //console.log(objeto);
-    //console.log(estado);
-    //Primero verificar en que estado estamos
     if (objeto == "0") {
       if (estado == "listo") {
-        //console.log("La cantidad es:" + objDisplay.textContent);
         return false; //si el primer digito que quieres ingresar es el 0 no haga nada;
       } else if (estado =="escribiendo") {
         if (objDisplay.textContent == "-") {
@@ -144,28 +151,34 @@ window.onload = ()=>{
         }
         if (estado == "operador"){ //aqui ya se metio el primer valor, pero regresara la funcion en nombre de fichas.jpg
           valorOperador = objDisplay.textContent;
-          console.log("el valor operador guardado es: " + valorOperador);
           objDisplay.textContent = objeto;
           objDisplay.value = objDisplay.textContent;
-          console.log(objDisplay.textContent);
-          console.log(objDisplay.value);
           estado = "escribiendo";
-          console.log("el estado es: " + estado);
         }
       }
-    if (objeto == "-"){//Negativo de un numero 
-      ///////////////////////TODO: no funciona el negativo para el valorB (hay que echarle coco papah)//////////////
+    if (objeto == "-"){//Aplicar el negativo a un numero.
         if (estado == "listo") {
           objDisplay.textContent = "-";
           objDisplay.value = objDisplay.textContent;
           estado = "escribiendo";
         } else if (estado =="escribiendo") {
+           if (valorA == ""){
+            valorA = objDisplay.textContent;
+            objDisplay.textContent = objeto;
+            objDisplay.value = objDisplay.textContent;
+            estado = "operador";
+            valorOperador = objDisplay.textContent;
+            objDisplay.textContent = "0";
+            objDisplay.value = objDisplay.textContent;
+            estado = "listo";
+          }
           fncOperador(objDigito_resta.textContent);//Modo operador del negativo first click
           punto = true;//activar punto en modo operador
-        }
-        if (estado == "operador"){
-          fncOperador(objDigito_resta.textContent);//tecnicamente es para cambiar el signo a negativo en modo operador.
-          punto = true;//activar punto en modo operador - testing
+        }else{
+          if (estado == "operador"){
+            fncOperador(objDigito_resta.textContent);//tecnicamente es para cambiar el signo a negativo en modo operador.
+            punto = true;//activar punto en modo operador - testing
+          }
         }
       }
     if (objeto == ".") {
@@ -201,6 +214,7 @@ window.onload = ()=>{
   objDigito_0.onclick = ()=>fncDigitos1_9(objDigito_0.textContent);
   objDigito_resta.onclick = ()=>fncDigitos1_9(objDigito_resta.textContent);
   objDigito_punto.onclick = ()=>fncDigitos1_9(objDigito_punto.textContent);
+  
   objDigito_suma.onclick = ()=>fncOperador(objDigito_suma.textContent);
   objDigito_multiplicacion.onclick = ()=>fncOperador(objDigito_multiplicacion.textContent);
   objDigito_division.onclick = ()=>fncOperador(objDigito_division.textContent);
