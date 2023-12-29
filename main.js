@@ -49,6 +49,11 @@ window.onload = ()=>{
   const objDigito_division = document.querySelector(".digit-div");
   
   const objDigito_resultado = document.querySelector(".digit-res");
+  
+  const objDigito_potencia = document.querySelector(".digit-pow");
+  const objDigito_raiz = document.querySelector(".digit-root");
+  const objDigito_porcentaje = document.querySelector(".digit-per");
+  
 //-------------------Funciones--------------------------//
 //Limpiar
   function fncLimpiar() {
@@ -61,6 +66,31 @@ window.onload = ()=>{
     valorB = "";
   }
   //---------------------------Funcion de resultado  ( = )-----------------------------//
+  //----------------Funcion de Potencia testeando------
+  function fncPotencia(objeto) {
+    this.objeto = objeto;
+    let resultadoFinal = 0;
+    if (estado == "escribiendo") {
+      valorA = objDisplay.textContent;
+      resultadoFinal = valorA * valorA;
+      objDisplay.textContent = resultadoFinal;
+      objDisplay.value = objDisplay.textContent;
+    }
+  }
+  //----------------Funcion Raiz cuadrada testeando-----
+  function fncRaiz(objeto) {
+    this.objeto = objeto;
+    console.log("el objeto es: " + objeto);
+    let resultadoFinal = 0;
+    if (estado == "escribiendo") {
+      valorA = objDisplay.textContent;
+      console.log("El valor a operar es: " + valorA);
+      resultadoFinal = Math.sqrt(valorA);
+      console.log("el resultado es: " + resultadoFinal);
+      objDisplay.textContent = resultadoFinal;
+      objDisplay.value = objDisplay.textContent;
+    }
+  }
   /////////////////////////////////////////TODO: testeando la funcion
   function fncOperar(_valorA, _valorB,_signo){
     this._valorA = _valorA;
@@ -75,6 +105,8 @@ window.onload = ()=>{
           return _valorA * _valorB;
         case '/':
           return _valorA / _valorB;
+        case '%':
+          return _valorA * (_valorB / 100);
       }
     }
   function fncResultado(objeto) {
@@ -82,21 +114,39 @@ window.onload = ()=>{
     if (estado == "escribiendo") {
       if (valorA != "") {//si tiene algun valor que no sea una cadena vacia;
         valorB = objDisplay.textContent;
+        if (valorOperador == "%"){
+          if (valorB <=0 || valorB >100) {
+            alert("el porcentaje tiene que ser un valor entre 1 y 100");
+            alert("Se procede a limpiar los campor");
+            objDisplay.textContent = "Error";
+            objDisplay.value = "Error";
+            fncLimpiar();
+            return false;
+          }
+        }
         //transformar ambas variables texto a numericas para la operacion;/
         let _valorA = parseFloat(valorA);
         let _valorB = parseFloat(valorB);
+        console.log("El valor A es: " + _valorA);
+        console.log("El operador es: " + valorOperador);
+        console.log("el valor B es: " + _valorB);
         objDisplay.textContent = fncOperar(_valorA,_valorB,valorOperador);
         objDisplay.value = objDisplay.textContent;
         let resultadoFinal = objDisplay.textContent;
+        console.log("El resultado es: " + resultadoFinal);
       } else if (valorA == "" || valorA == undefined){//si el valor es totalmente vacio
         return false;
       }
     }
   }
-  //------------------Funciones de operadores (+-*/% root power)
+  //------------------Funciones de operadores (+-*/% root)
   function fncOperador(objeto) {
     this.objeto = objeto;
-    punto = true;//activar punto en modo operador
+    if (objeto == "%"){
+      punto = false;
+    }else {
+      punto = true;//activar punto en modo operador
+    }
     if (estado == "escribiendo") {
       if (valorA == ""){
         valorA = objDisplay.textContent;
@@ -219,4 +269,8 @@ window.onload = ()=>{
   objDigito_multiplicacion.onclick = ()=>fncOperador(objDigito_multiplicacion.textContent);
   objDigito_division.onclick = ()=>fncOperador(objDigito_division.textContent);
   objDigito_resultado.onclick = ()=>fncResultado(objDigito_resultado.textContent);
+  
+  objDigito_potencia.onclick = ()=> fncPotencia(objDigito_potencia.textContent);
+  objDigito_porcentaje.onclick = ()=>fncOperador(objDigito_porcentaje.textContent);
+  objDigito_raiz.onclick = ()=>fncRaiz(objDigito_raiz.textContent);
 };
