@@ -4,16 +4,15 @@
 }
 .container{
     width: 250px;
-    height: 360px;
-    background-color: beige;
+    height: 380px;
+    background-color: #CCC;
     display: block;
-    border: 5px black solid;
+    border: 5px #888 solid;
     border-radius: 5px;
     box-sizing: border-box;
     margin: 20px auto;
 }
 .containerDisplay{
-    background-color: red;
     width: 90%;
     height:auto;
     margin: 5%;
@@ -24,12 +23,25 @@
     margin-bottom: 10px;
 }
 .display{
+    position: relative;
     text-align: right;
     height:30px;
     width:100%;
     box-sizing: border-box;
     font-size: 14pt;
     font-family: monospace;
+    border: 3px #AAA solid;
+}
+.display-sm{
+  position: relative; 
+  bottom:15px;
+  left:5px;
+  font-weight: bold;
+  background-color: white;
+  width:20px;
+  height:12px;
+  font-size: 8pt;
+  color: black;
 }
 .containerDigits{
     width: 100%;
@@ -40,6 +52,7 @@
     clear:none;
 }
 .digit{
+    font-family: monospace;
     display:block;
     clear:none;
     float:left;
@@ -47,4 +60,30 @@
     height: 40px;
     box-sizing: border-box;
     margin: 10px;
+    border-radius: 5px;
+}
+.digit-ac{
+  font-size: 12pt;
+  color:white;
+  background-color: #DD2222;
+}
+.digit-spc{
+  font-size: 10pt;
+  color:white;
+  background-color: #4444EE;
+}
+.digit-oper{
+  font-size: 12pt;
+  color:white;
+  background-color: #4444FF;
+}
+.digit-res{
+    font-size: 12pt;
+    color:white;
+    background-color: #118811;
+}
+.digit-n{
+    font-size: 12pt;
+    color:white;
+    background-color: #AAA;
 }
