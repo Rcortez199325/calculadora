@@ -1,65 +1,9 @@
-//Extraer todo via Query Selector
-const _divTexto = document.querySelector("#divTexto");
-const _divTextoB = document.querySelector("#divTextoB");
-const _inputText = document.querySelector("#inputText");
-const _inputButton = document.querySelector("#inputButton");
-const _boton = document.querySelector("#boton");
+//BUG encontrado,
+//despues de escribir el primer valor
+//luego que metemos algun operador
+//este no admite el numero 0 al inicio y luego el resultado
+por ejemplo:
 
-const __divtexto = document.getElementById("divTexto");
-const __divtextoB = document.getElementById("divTextoB");
-const __inputText = document.getElementById("inputText");
-const __inputButton = document.getElementById("inputButton");
-const __boton = document.getElementById("boton");
+10 + 0 = 10;
 
-/*
-var parrafo = document.createElement("div");
-parrafo.className= "controles";
-var contenido = document.createTextNode("Creado desde DOM");
-parrafo.appendChild(contenido);
-document.body.appendChild(parrafo);
-*/
-
-//Funcion Externa
-const nombreA = "Ramon";
-const nombreB = "Adrian";
-
-function saludarA(e) {
-    this.e = e;
-    alert(`Hola mi nombre es ${e}`);
-}
-
-function saludarB() {
-    alert(`Hola mi nombre es ${nombreB}`);
-}
-//Asignacion de Funcion al elemento HTML
-
-////usar este metodo sí SI es necesario meter parametros
-//document.getElementById("boton").onclick = ()=>saludarA(nombreA);
-//
-////usar este metodo sí NO es necesario meter parametros
-//document.getElementById("inputButton").onclick = saludarB;
-
-
-////Con querySelector solo funciona la tecnica del callback
-//_inputButton.onclick = ()=>saludarA(nombreA);
-//
-//_boton.onclick = ()=> saludarB();
-
-//Desde una constante obtenida del Id
-__inputButton.onclick = ()=> saludarA(nombreA);
-__inputButton.onmouseover =()=> __inputButton.style.backgroundColor= "#eebbcc";
-__inputButton.onmouseout =()=> __inputButton.style.backgroundColor= "#cc88dd";
-
-__boton.onclick = ()=> saludarB();
-
-__boton.onmouseover =()=> __boton.style.backgroundColor= "#eebbcc";
-__boton.onmouseout =()=> __boton.style.backgroundColor= "#cc88dd";
-
-//
-12-27-2023
-se agregaron varias funcionalidades de botones.
-
-TEST- boton de resultado ( = ).
-FIX: el boton para meter numeros negativos funciona en el valorA pero no en el valorB (al parecer tiene que ver con el hecho de que en modo "operador" 
-si presionamos los 4 operadores basicos, estos se van cambiando uno por otro, en vez de que se quede ese operador fijo, cerremos proceso de operador y 
-nuevamente estamos en modo "escritura" y en este modo si que podremos entrar al negativo.
+no muestra el resultado. tal vez porque esta limitada la tecla del 0, deberiamos desbloquearla cuando ya se tiene un valorA != ""  .
