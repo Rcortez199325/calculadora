@@ -1,9 +1,3 @@
-//Desde el inicio se crea un estado de "pendiente" donde:
-//Esta esperando a que se ingresen los digitos 1-9 y . ( en caso de que empiece con '.' mantener el cero inicial, para el primer numero) y 0-9 para del segundo en delante o 
-//Esta esperando a que se ingrese la operacion (-) por si se va a realizar una operacion con numero negativo.
-//
-
-//Prevent default sobre los botones (evita que se refresque la pagina)
 window.onload = ()=>{
   var estado = "listo";
   var punto = true; //se puede insertar un punto a la cantidad
@@ -53,6 +47,7 @@ window.onload = ()=>{
   const objDigito_potencia = document.querySelector(".digit-pow");
   const objDigito_raiz = document.querySelector(".digit-root");
   const objDigito_porcentaje = document.querySelector(".digit-per");
+  const objDisplay_sm = document.querySelector(".display-sm");
   
 //-------------------Funciones--------------------------//
 //Limpiar
@@ -64,6 +59,8 @@ window.onload = ()=>{
     valorOperador = "";
     valorA = "";
     valorB = "";
+    objDisplay_sm.textContent = "";
+    objDisplay_sm.value = objDisplay_sm.textContent;
   }
   //---------------------------Funcion de resultado  ( = )-----------------------------//
   //----------------Funcion de Potencia testeando------
@@ -120,6 +117,8 @@ window.onload = ()=>{
             alert("Se procede a limpiar los campor");
             objDisplay.textContent = "Error";
             objDisplay.value = "Error";
+            objDisplay_sm.textContent = "";
+            objDisplay_sm.value = objDisplay_sm.textContent;
             fncLimpiar();
             return false;
           }
@@ -134,6 +133,8 @@ window.onload = ()=>{
         objDisplay.value = objDisplay.textContent;
         let resultadoFinal = objDisplay.textContent;
         console.log("El resultado es: " + resultadoFinal);
+        objDisplay_sm.textContent = "";
+        objDisplay_sm.value = objDisplay_sm.textContent;
       } else if (valorA == "" || valorA == undefined){//si el valor es totalmente vacio
         return false;
       }
@@ -144,6 +145,8 @@ window.onload = ()=>{
     this.objeto = objeto;
     if (objeto == "%"){
       punto = false;
+      objDisplay_sm.textContent = objeto;
+      objDisplay_sm.value = objDisplay_sm.textContent;
     }else {
       punto = true;//activar punto en modo operador
     }
@@ -156,6 +159,8 @@ window.onload = ()=>{
         valorOperador = objDisplay.textContent;
         objDisplay.textContent = "0";
         objDisplay.value = objDisplay.textContent;
+        objDisplay_sm.textContent = objeto;
+        objDisplay_sm.value = objDisplay_sm.textContent;
         estado = "listo";
         //}
       } else{
@@ -217,12 +222,14 @@ window.onload = ()=>{
             objDisplay.textContent = objeto;
             objDisplay.value = objDisplay.textContent;
             estado = "operador";
+            objDisplay_sm.textContent = objeto;
+            objDisplay_sm.value = objDisplay_sm.textContent;
             valorOperador = objDisplay.textContent;
             objDisplay.textContent = "0";
             objDisplay.value = objDisplay.textContent;
             estado = "listo";
           }
-          fncOperador(objDigito_resta.textContent);//Modo operador del negativo first click
+          fncOperador(objeto);//Modo operador del negativo first click
           punto = true;//activar punto en modo operador
         }else{
           if (estado == "operador"){
