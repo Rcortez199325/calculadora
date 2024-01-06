@@ -1,25 +1,9 @@
 window.onload = ()=>{
   var estado = "listo";
-  var punto = true; //se puede insertar un punto a la cantidad
-  var negativo = true; //se puede hacer este numero en negativo;---sale sobrando
-  var valorA = "";//valores que se usaran para las operaciones
+  var punto = true;
+  var valorA = "";
   var valorB = "";
-  var valorOperador = "";
-  //variable general de estado donde:
-  //
-  // 1.-listo - recien limpiado todo y listo para recibir:
-  // cualquier digito exceptuendo el "0" 
-  // el Digito negativo (-) para hacer operaciones con negativos
-  // el punto para una cantidad fraccionaria
-  // 
-  // 2.- escribiendo
-  // al pasar de listo a escribiendo lo que hace es borrar el (0) inicial
-  // y empezar a escribir los digitos correspondientes (aqui tambien se incluye el punto, pero solamente una vez);
-  // 3.- operador
-  // Cuando esta en escribiendo y se da click en algun operador... 
-  // este se pone en modo operador en esta seccion el usuario elige que operacion se va a realizar 
-  // (suma, resta, multiplicacion, division, porcentaje, raiz o potencia)
-  
+  var valorOperador = "";  
   var objDisplay = document.querySelector(".display");
   objDisplay.value = "0";
   objDisplay.textContent = "0";
@@ -129,10 +113,44 @@ window.onload = ()=>{
         console.log("El valor A es: " + _valorA);
         console.log("El operador es: " + valorOperador);
         console.log("el valor B es: " + _valorB);
-        objDisplay.textContent = fncOperar(_valorA,_valorB,valorOperador);
-        objDisplay.value = objDisplay.textContent;
-        let resultadoFinal = objDisplay.textContent;
-        console.log("El resultado es: " + resultadoFinal);
+        let preOperar = fncOperar(_valorA,_valorB,valorOperador);
+        let resultadoFinal = preOperar.toString();
+        console.log(typeof(resultadoFinal));
+        //-----------Testeando lo del valor despues del punto
+        //Limito a la aplicacion a solo tener 2 digitos despues del decimal
+        //Esto con el fin de que tiene un extrano bug donde escribe
+        // numeros 00000 a lo wey, y por eso lo bloquie alv
+        if (resultadoFinal.includes('.') == true){
+          let _array = [];
+          for ( let i=0; i<resultadoFinal.length ; i++) {
+            _array.push(resultadoFinal.charAt(i));
+          }
+          console.log(_array);
+          let _posicion = 0;
+          for( let i=0; i<_array.length; i++) {
+            if (_array[i] == ".") {
+              _posicion = (i);
+              console.log("la posicion del punto es: " + _posicion);
+            }
+          }
+          //Ya tenemos el array completo, ya tenemos la posicion del punto, ahora hay que calcular cuantos espacios hay deespues del punto
+          let _resto = (_array.length - 1) - _posicion;
+          console.log("el resto es: " + _resto);
+          while(_resto > 2) {
+            _array.pop();
+            _resto -= 1;
+          }
+          console.log("el resultado del array es: " + _array);
+          let _numero = "";
+          for ( let i=0; i<_array.length; i++) {
+            _numero += _array[i];
+          }
+          console.log("EL resultado string es: " + _numero);
+          resultadoFinal = _numero;
+        }
+        objDisplay.textContent = resultadoFinal;
+        objDisplay.value = resultadoFinal;
+        //------------
         objDisplay_sm.textContent = "";
         objDisplay_sm.value = objDisplay_sm.textContent;
       } else if (valorA == "" || valorA == undefined){//si el valor es totalmente vacio
@@ -177,9 +195,13 @@ window.onload = ()=>{
     this.objeto = objeto;
     if (objeto == "0") {
       if (estado == "listo") {
+        if (valorA != "") {
+          estado = "escribiendo";
+          return true;
+        }
         return false; //si el primer digito que quieres ingresar es el 0 no haga nada;
       } else if (estado =="escribiendo") {
-        if (objDisplay.textContent == "-") {
+        if (objDisplay.textContent == "-" || objDisplay.textContent == "0") {
           return false;
         }else {
           objDisplay.textContent += objeto;//como ya hay un numero mayor a cero, ya puede escribir los que necesite.
