@@ -1,9 +1,0 @@
-//BUG encontrado,
-//despues de escribir el primer valor
-//luego que metemos algun operador
-//este no admite el numero 0 al inicio y luego el resultado
-por ejemplo:
-
-10 + 0 = 10;
-
-no muestra el resultado. tal vez porque esta limitada la tecla del 0, deberiamos desbloquearla cuando ya se tiene un valorA != ""  .
