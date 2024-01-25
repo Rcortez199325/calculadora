@@ -1,9 +1,14 @@
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+html, body{
+  background: #cdf3f3;
 }
 .container{
     max-width: 575px;
+    min-width: 570px;
     height: 710px;
     background-color: #CCC;
     display: block;
@@ -13,7 +18,7 @@
     margin: 20px auto;
 }
 .containerDisplay{
-    width: 90%;
+    width: 100%;
     height:auto;
     box-sizing: border-box;
     display: block;
@@ -25,23 +30,25 @@
     text-align: right;
     height:60px;
     box-sizing: border-box;
-    font-size: 24pt;
+    font-size: 28pt;
     font-family: monospace;
     border: 3px #AAA solid;
 }
 .display-sm{
   position: relative; 
-  bottom:30px;
+  bottom:35px;
   left:8px;
   font-weight: bold;
   background-color: white;
   width:20px;
   height:12px;
-  font-size: 14pt;
+  font-size: 18pt;
   color: black;
 }
 .containerDigits{
-    background-color:#ff5;
+    margin-left:5%;
+    display:block;
+    /* background-color:#ff5; */
     width: 100%;
     box-sizing: border-box;
 }
@@ -57,27 +64,27 @@
     border-radius: 5px;
 }
 .digit-ac{
-  font-size: 12pt;
+  font-size: 24pt;
   color:white;
   background-color: #DD2222;
 }
 .digit-spc{
-  font-size: 10pt;
+  font-size: 22pt;
   color:white;
   background-color: #4444EE;
 }
 .digit-oper{
-  font-size: 12pt;
+  font-size: 22pt;
   color:white;
   background-color: #4444FF;
 }
 .digit-res{
-    font-size: 12pt;
+    font-size: 24pt;
     color:white;
     background-color: #118811;
 }
 .digit-n{
-    font-size: 12pt;
+    font-size: 22pt;
     color:white;
     background-color: #AAA;
 }
