@@ -3,8 +3,8 @@
     padding: 0;
 }
 .container{
-    width: 250px;
-    height: 380px;
+    max-width: 575px;
+    height: 710px;
     background-color: #CCC;
     display: block;
     border: 5px #888 solid;
@@ -15,7 +15,6 @@
 .containerDisplay{
     width: 90%;
     height:auto;
-    margin: 5%;
     box-sizing: border-box;
     display: block;
     float: left;
@@ -23,41 +22,36 @@
     margin-bottom: 10px;
 }
 .display{
-    position: relative;
     text-align: right;
-    height:30px;
-    width:100%;
+    height:60px;
     box-sizing: border-box;
-    font-size: 14pt;
+    font-size: 24pt;
     font-family: monospace;
     border: 3px #AAA solid;
 }
 .display-sm{
   position: relative; 
-  bottom:15px;
-  left:5px;
+  bottom:30px;
+  left:8px;
   font-weight: bold;
   background-color: white;
   width:20px;
   height:12px;
-  font-size: 8pt;
+  font-size: 14pt;
   color: black;
 }
 .containerDigits{
+    background-color:#ff5;
     width: 100%;
-    margin: 0 auto;
     box-sizing: border-box;
-    display: block;
-    float:left;
-    clear:none;
 }
 .digit{
     font-family: monospace;
     display:block;
     clear:none;
     float:left;
-    width: 40px;
-    height: 40px;
+    width: 100px;
+    height: 100px;
     box-sizing: border-box;
     margin: 10px;
     border-radius: 5px;

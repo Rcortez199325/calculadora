@@ -1,52 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Calculadora web</title>
-        <meta name="author" content="Ramon Adrian Cortez Acosta" />
-        <link rel="stylesheet" href="main.css" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="application-name" content="calculadora" />
-        <meta name="robots" content="index, follow" />
-    </head>
-    <div class="container">
-        <div class="containerDisplay">
-            <input class="display" type="text" value="starting...">
-            <div class=display-sm></div>
-        </div>
-        <div class="containerDigits">
-            <button class="digit digit-clear digit-ac" type="button">AC</button>
-            <button class="digit digit-pow digit-spc" type="button">x^2</button>
-            <button class="digit digit-root digit-spc" type="button">Raiz</button>
-            <button class="digit digit-per digit-spc" type="button">%</button>
-        </div>
-        
-        <div class="containerDigits">
-            <button class="digit digit-1 digit-n" type="button">1</button>
-            <button class="digit digit-2 digit-n" type="button">2</button>
-            <button class="digit digit-3 digit-n" type="button">3</button>
-            <button class="digit digit-mult digit-oper" type="button">*</button>
-        </div>
-        <div class="containerDigits">
-            <button class="digit digit-4 digit-n" type="button">4</button>
-            <button class="digit digit-5 digit-n" type="button">5</button>
-            <button class="digit digit-6 digit-n" type="button">6</button>
-            <button class="digit digit-div digit-oper" type="button">/</button>
-        </div>
-        <div class="containerDigits">
-            <button class="digit digit-7 digit-n" type="button">7</button>
-            <button class="digit digit-8 digit-n" type="button">8</button>
-            <button class="digit digit-9 digit-n" type="button">9</button>
-            <button class="digit digit-point digit-oper" type="button">.</button>
-        </div>
-        <div class="containerDigits">
-            <button class="digit digit-sub digit-oper" type="button">-</button>
-            <button class="digit digit-0 digit-n" type="button">0</button>
-            <button class="digit digit-add digit-oper" type="button">+</button>
-            <button class="digit digit-res" type="button">=</button>
-        </div>
+  <head>
+      <title>Calculadora web</title>
+      <meta name="author" content="Ramon Adrian Cortez Acosta" />
+      <!-- Bootstrap CSS -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+      <link rel="stylesheet" href="main.css" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="application-name" content="calculadora" />
+      <meta name="robots" content="index, follow" />
+  </head>
+  <div class="container">
+    <div class="col-lg-8 col-md-8 col-sm-12 d-flex flex-column">
+      <!-- Div del display -->
+      <div class="containerDisplay mt-3">
+        <input class="display form-control" type="text" value="starting...">
+        <div class=display-sm></div>
+      </div>
+      <!-- Divs de las teclas -->
+      <div class="containerDigits">
+          <button class="digit digit-clear digit-ac" type="button">AC</button>
+          <button class="digit digit-pow digit-spc" type="button">x^2</button>
+          <button class="digit digit-root digit-spc" type="button">Raiz</button>
+          <button class="digit digit-per digit-spc" type="button">%</button>
+      
+          <button class="digit digit-1 digit-n" type="button">1</button>
+          <button class="digit digit-2 digit-n" type="button">2</button>
+          <button class="digit digit-3 digit-n" type="button">3</button>
+          <button class="digit digit-mult digit-oper" type="button">*</button>
+
+          <button class="digit digit-4 digit-n" type="button">4</button>
+          <button class="digit digit-5 digit-n" type="button">5</button>
+          <button class="digit digit-6 digit-n" type="button">6</button>
+          <button class="digit digit-div digit-oper" type="button">/</button>
+
+          <button class="digit digit-7 digit-n" type="button">7</button>
+          <button class="digit digit-8 digit-n" type="button">8</button>
+          <button class="digit digit-9 digit-n" type="button">9</button>
+          <button class="digit digit-point digit-oper" type="button">.</button>
+
+          <button class="digit digit-sub digit-oper" type="button">-</button>
+          <button class="digit digit-0 digit-n" type="button">0</button>
+          <button class="digit digit-add digit-oper" type="button">+</button>
+          <button class="digit digit-res" type="button">=</button>
+      </div>
     </div>
-    
-    <body>
-        <script src="main.js"></script>
-    </body>
+  </div>
+      
+  
+  <body>
+      <script src="main.js"></script>
+      <!-- Bootstrap JS -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
 </html>
