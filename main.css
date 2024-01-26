@@ -9,7 +9,7 @@ html, body{
 .container{
     max-width: 575px;
     min-width: 570px;
-    height: 720px;
+    height: 730px;
     background-color: #CCC;
     display: block;
     border: 10px #888 solid;
