@@ -9,7 +9,7 @@ html, body{
 .container{
     max-width: 575px;
     min-width: 570px;
-    height: 710px;
+    height: 720px;
     background-color: #CCC;
     display: block;
     border: 5px #888 solid;
@@ -54,37 +54,23 @@ html, body{
 }
 .digit{
     font-family: monospace;
-    display:block;
-    clear:none;
-    float:left;
     width: 100px;
     height: 100px;
+    margin: 2%;
     box-sizing: border-box;
-    margin: 10px;
-    border-radius: 5px;
 }
 .digit-ac{
   font-size: 24pt;
-  color:white;
-  background-color: #DD2222;
 }
 .digit-spc{
   font-size: 22pt;
-  color:white;
-  background-color: #4444EE;
 }
 .digit-oper{
   font-size: 22pt;
-  color:white;
-  background-color: #4444FF;
 }
 .digit-res{
     font-size: 24pt;
-    color:white;
-    background-color: #118811;
 }
 .digit-n{
     font-size: 22pt;
-    color:white;
-    background-color: #AAA;
 }
