@@ -12,10 +12,10 @@ html, body{
     height: 720px;
     background-color: #CCC;
     display: block;
-    border: 5px #888 solid;
+    border: 10px #888 solid;
     border-radius: 5px;
     box-sizing: border-box;
-    margin: 20px auto;
+    margin: 50px auto;
 }
 .containerDisplay{
     width: 100%;
@@ -32,12 +32,12 @@ html, body{
     box-sizing: border-box;
     font-size: 28pt;
     font-family: monospace;
-    border: 3px #AAA solid;
+    border: 5px #AAA solid;
 }
 .display-sm{
   position: relative; 
-  bottom:35px;
-  left:8px;
+  bottom:38px;
+  left:10px;
   font-weight: bold;
   background-color: white;
   width:20px;
